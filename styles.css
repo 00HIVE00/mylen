@@ -1,0 +1,508 @@
+/* Import Google Fonts for Poppins (Headings) and Inter (Body) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;600&display=swap');
+
+/* ==============================
+   I. Global Variables & Reset
+   ============================== */
+:root {
+    --color-primary: #6B7A49; /* Olive Green */
+    --color-accent: #B06A46; /* Terracotta */
+    --color-background: #F5EFE6; /* Cream */
+    --color-background-alt: #EBE4DB; /* Beige */
+    --color-text: #2F2B28; /* Warm dark neutral */
+    --color-light-grey: #DDDDDD;
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background-color: var(--color-background);
+    background-image: linear-gradient(135deg, #F5EFE6 0%, #EBE4DB 100%); /* Subtle warm gradient */
+    line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scroll from AOS animations */
+}
+
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+    margin-bottom: 0.5em;
+    line-height: 1.2;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-accent);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #9A5F40; /* slightly darker Terracotta */
+    text-decoration: underline;
+}
+
+/* Reusable Container */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+/* Primary Button Styling */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 25px;
+    border-radius: 5px;
+    background-color: var(--color-primary); /* Secondary buttons = Olive */
+    color: #FFFFFF;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid var(--color-primary);
+}
+
+.btn:hover {
+    background-color: #55663A; /* darker olive */
+    color: #FFFFFF;
+    transform: translateY(-2px) scale(1.02);
+}
+
+/* Primary CTA buttons = Terracotta */
+.btn.primary-btn {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+.btn.primary-btn:hover {
+    background-color: #9A5F40; /* slightly darker terracotta */
+}
+
+/* Accessible focus styles */
+.btn:focus-visible, a:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+/* Sub-title style used in hero sections */
+.sub-title {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Footer Style */
+footer {
+    text-align: center;
+    padding: 30px 5%;
+    background-color: var(--color-primary); /* Olive footer */
+    color: var(--color-background); /* Cream text */
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+/* ==============================
+   II. Navigation & Responsiveness
+   ============================== */
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: linear-gradient(180deg, rgba(245,239,230,0.9) 0%, rgba(235,228,219,0.85) 100%);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    animation: headerReveal 600ms ease-out both;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.main-nav ul {
+    list-style: none;
+    display: none; /* Hidden by default for mobile */
+}
+
+.main-nav nav a {
+    padding: 5px 15px;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Navigation Hover Animation (Animated Underline) */
+.main-nav nav a::after {
+    content: none; /* underline animation removed */
+}
+
+.main-nav nav a i {
+    margin-right: 6px;
+    color: var(--color-primary);
+}
+
+.main-nav nav a:hover::after,
+.main-nav nav a.active::after {
+    transform: none; /* no animation */
+}
+
+/* Header reveal animation */
+@keyframes headerReveal {
+    from {
+        opacity: 0;
+        transform: translateY(-16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Active and hover background for nav items */
+.main-nav nav a:hover,
+.main-nav nav a.active {
+    background-color: var(--color-background-alt);
+    color: var(--color-primary);
+    border-radius: 6px;
+}
+
+.menu-toggle {
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-primary);
+}
+
+/* Mobile Menu Display CSS */
+@media (max-width: 991px) { /* Breakpoint adjusted slightly larger for tablet */
+    .main-nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px; 
+        left: 0;
+        background-color: white;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+    }
+    
+    .main-nav ul.active {
+        display: flex; /* Show menu when 'active' class is added */
+    }
+
+    .main-nav ul li {
+        text-align: center;
+        margin: 10px 0;
+    }
+}
+
+/* DESKTOP NAVIGATION */
+@media (min-width: 992px) { 
+    .menu-toggle {
+        display: none;
+    }
+    .main-nav ul {
+        display: flex; /* Show menu for desktop */
+        gap: 20px;
+    }
+}
+
+
+/* ==============================
+   III. Section Styles (Responsive Layouts)
+   ============================== */
+
+/* --- Hero Section (index.html) --- */
+.hero-section {
+    display: flex;
+    flex-direction: column; /* Stacked on mobile */
+    align-items: center;
+    padding: 60px 5%;
+    text-align: center;
+    gap: 40px;
+    background:
+        radial-gradient(800px 200px at 20% -10%, rgba(107, 122, 73, 0.10), transparent 60%),
+        radial-gradient(800px 200px at 80% 110%, rgba(176, 106, 70, 0.10), transparent 60%);
+}
+
+.hero-content {
+    max-width: 500px;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    color: var(--color-text);
+    line-height: 1.1;
+    margin-bottom: 10px;
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 16px; 
+    border: 5px solid var(--color-primary);
+    object-fit: cover;
+    box-shadow: 0 0 0 8px var(--color-background-alt); /* Double ring effect */
+}
+
+/* DESKTOP HERO LAYOUT */
+@media (min-width: 992px) {
+    .hero-section {
+        flex-direction: row; /* Side-by-side on desktop */
+        justify-content: space-around;
+        text-align: left;
+        padding: 100px 5%;
+    }
+    .hero-content h1 {
+        font-size: 3.5rem;
+    }
+}
+
+
+/* --- About & Contact Grid Layouts (about.html, contact.html) --- */
+.about-content-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 40px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr; 
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.info-card {
+    padding: 30px;
+    background: var(--color-background-alt);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(107, 122, 73, 0.25); /* subtle Olive border */
+}
+
+/* DESKTOP ABOUT & CONTACT LAYOUTS */
+@media (min-width: 768px) {
+    .about-content-grid {
+        /* Bio, Goals, Hobbies */
+        grid-template-areas: 
+            "bio goals"
+            "hobbies hobbies";
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .bio-text { grid-area: bio; }
+    .goals-vision { grid-area: goals; }
+    .hobbies { grid-area: hobbies; }
+    
+    .contact-grid {
+        grid-template-columns: repeat(2, 1fr); 
+        grid-template-rows: auto auto;
+    }
+    
+    .contact-form-wrapper {
+        grid-column: 1 / -1; /* Form spans both columns */
+        margin-top: 20px;
+    }
+}
+
+/* --- Hobbies List Styling --- */
+.hobbies-list p {
+    padding: 10px 0;
+    border-left: 3px solid var(--color-accent);
+    padding-left: 15px;
+    margin-bottom: 10px;
+}
+
+
+/* ==============================
+   IV. Skills & Progress Bars
+   ============================== */
+.skills-list {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 30px;
+}
+
+.skill-card {
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+/* Subtle Animation: Card Hover Lift */
+.skill-card:hover {
+    transform: translateY(-5px);
+}
+
+.progress-bar-container {
+    height: 10px;
+    background-color: var(--color-light-grey);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--color-accent);
+    width: 0%; /* Initial state for JavaScript animation */
+    transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth easing */
+}
+
+.progress-label {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    text-align: right;
+    color: #666;
+}
+
+/* DESKTOP SKILLS LAYOUT */
+@media (min-width: 768px) {
+    .skills-list {
+        grid-template-columns: repeat(3, 1fr); /* Three columns on tablet/desktop */
+    }
+}
+
+
+/* ==============================
+   V. Projects Showcase
+   ============================== */
+.project-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.project-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid var(--color-primary);
+    border: 1px solid rgba(107, 122, 73, 0.2); /* subtle Olive border */
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Creative Animation: Card Pop-out on Hover */
+.project-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -40%;
+    width: 70%;
+    height: 140%;
+    background: radial-gradient(closest-side, rgba(0, 123, 255, 0.12), transparent 70%);
+    transform: rotate(25deg);
+}
+
+.project-card img {
+    width: 100%;
+    height: 200px; 
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.tech-tag {
+    display: inline-block;
+    background-color: var(--color-light-grey);
+    color: var(--color-text);
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    margin-right: 5px;
+    margin-top: 10px;
+}
+
+.project-link {
+    margin-top: 15px;
+    display: inline-block;
+}
+
+/* DESKTOP PROJECTS LAYOUT */
+@media (min-width: 992px) {
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+
+/* ==============================
+   VI. Contact Form & Social Buttons
+   ============================== */
+
+/* Form Styling */
+.simple-contact-form {
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.simple-contact-form input,
+.simple-contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid var(--color-light-grey);
+    border-radius: 5px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    outline-color: var(--color-accent);
+}
+
+/* Social Buttons */
+.social-card {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    border-radius: 5px;
+    font-weight: 600;
+    color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.social-btn .icon {
+    font-size: 1.2rem;
+    margin-right: 10px;
+}
+
+/* Social Button Colors */
+.facebook-btn { background-color: #3b5998; }
+.tiktok-btn { background-color: #000000; }
+.github-btn { background-color: #444444; }
+
+/* Social Button Animation: Slight Rotation on Hover */
+.social-btn:hover {
+    transform: rotate(2deg) translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}

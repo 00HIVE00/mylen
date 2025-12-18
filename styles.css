@@ -652,6 +652,20 @@ a:hover {
     z-index: 1;
 }
 
+/* Shared style for resource link lists (skills, home, projects) */
+.resource-links {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.resource-links li a {
+    font-weight: 500;
+}
+
 @media (min-width: 992px) {
     .project-grid {
         grid-template-columns: repeat(2, 1fr);
